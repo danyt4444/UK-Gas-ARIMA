@@ -1,0 +1,203 @@
+---
+title: "HW 9 ARIMA"
+output: pdf_document
+date: '2022-11-14'
+---
+
+```{r}
+library(fpp)
+library(fpp2)
+library(forecast)
+
+UKgas
+```
+
+```{r}
+
+plot(UKgas)
+```
+```{r}
+
+plot(UKgas)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+ndiffs(UKgas)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r}
+tsdisplay(UKgas)
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+UKgasdiff1 <- diff(UKgas, differences=1)
+plot(UKgasdiff1)
+
+```
+
+```{r}
+
+tsdisplay(UKgasdiff1)
+
+```
+
+```{r}
+
+auto_fit <- auto.arima(UKgas, trace=TRUE, stepwise = FALSE)
+auto_fit
+
+```
+
+```{r}
+
+
+auto_fit
+
+```
+
+```{r}
+
+
+attributes(auto_fit)
+
+```
+
+
+```{r}
+
+
+plot(forecast(auto_fit,h=5,level=c(99.5)))
+```
+
+```{r}
+#Residual Analysis
+Acf(auto_fit$residuals)
+
+
+```
+
+
+```{r}
+
+Box.test(residuals(auto_fit), lag=20, type="Ljung")
+```
+
+
+```{r}
+
+plot.ts(residuals(auto_fit))
+
+```
+```{r}
+
+
+hist(auto_fit$residuals)
+```
+
+
+
+```{r}
+
+tsdiag(auto_fit)
+```
+
+```{r}
+#Seasonal Data
+plot(UKgas)
+
+```
+
+```{r}
+#Seasonal Data
+nsdiffs(UKgas)
+
+```
+
+
+```{r}
+#Seasonal Data
+
+ndiffs(euretail)
+```
+
+
+```{r}
+#Seasonal Data
+
+ndiffs((diff(UKgas,4)))
+```
+
+```{r}
+#Seasonal Data
+
+
+
+tsdisplay(diff(diff(UKgas,4)))
+```
+
+```{r}
+#Seasonal Data
+
+fit3 <- auto.arima(UKgas,trace=TRUE, stepwise = FALSE )
+
+
+```
+
+
+```{r}
+#Seasonal Data
+
+fit3 
+
+
+```
+
+```{r}
+#Residual Analysis
+Acf(fit3$residuals)
+
+
+```
+
+```{r}
+
+Box.test(residuals(fit3), lag=20, type="Ljung")
+
+
+```
+
+```{r}
+#Residual Analysis
+plot.ts(residuals(fit3))
+
+
+```
+
+
+```{r}
+
+hist(fit3$residuals)
+```
+
+
+
+```{r}
+
+tsdiag(fit3)
+```
+
+
+
